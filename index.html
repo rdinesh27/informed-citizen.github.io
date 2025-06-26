@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informed Citizen - Governance Performance Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .scorecard {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .scorecard h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .score-item:last-child {
+            border-bottom: none;
+        }
+        
+        .category {
+            font-weight: 600;
+            color: #34495e;
+        }
+        
+        .score {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 25px;
+            color: white;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .score.excellent { background: linear-gradient(45deg, #27ae60, #2ecc71); }
+        .score.good { background: linear-gradient(45deg, #f39c12, #e67e22); }
+        .score.average { background: linear-gradient(45deg, #e74c3c, #c0392b); }
+        
+        .news-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+        }
+        
+        .news-item {
+            padding: 20px;
+            margin: 15px 0;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .news-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .news-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .news-impact {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .positive { background: #d4edda; color: #155724; }
+        .negative { background: #f8d7da; color: #721c24; }
+        .neutral { background: #d1ecf1; color: #0c5460; }
+        
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .methodology {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .trend-indicator {
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+        
+        .trending-up { color: #27ae60; }
+        .trending-down { color: #e74c3c; }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .filters {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗳️ Informed Citizen</h1>
+            <p>Empowering democracy through data-driven governance tracking</p>
+            <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
+                "Democracy works best when citizens are informed" - Tracking governance performance with facts, not opinions
+            </div>
+        </div>
+        
+        <div class="dashboard">
+            <div class="scorecard">
+                <h2>📊 Current Governance Scores</h2>
+                <div class="score-item">
+                    <span class="category">Economic Performance</span>
+                    <span class="score good">7.2<span class="trend-indicator trending-up">↗️ +0.3</span></span>
+                </div>
+                <div class="score-item">
+                    <span class="category">Employment & Jobs</span>
+                    <span class="score average">5.8<span class="trend-indicator trending-down">↘️ -0.2</span></span>
+                </div>
+                <div class="score-item">
+                    <span class="category">Infrastructure</span>
+                    <span class="score excellent">8.4<span class="trend-indicator trending-up">↗️ +0.5</span></span>
+                </div>
+                <div class="score-item">
+                    <span class="category">Healthcare</span>
+                    <span class="score good">6.9<span class="trend-indicator trending-up">↗️ +0.1</span></span>
+                </div>
+                <div class="score-item">
+                    <span class="category">Education</span>
+                    <span class="score good">6.5<span class="trend-indicator trending-up">↗️ +0.2</span></span>
+                </div>
+                <div class="score-item">
+                    <span class="category">Transparency</span>
+                    <span class="score average">5.2<span class="trend-indicator trending-down">↘️ -0.4</span></span>
+                </div>
+            </div>
+            
+            <div class="scorecard">
+                <h2>📈 Historical Comparison</h2>
+                <div class="score-item">
+                    <span class="category">Current Government (2021-2025)</span>
+                    <span class="score good">6.8</span>
+                </div>
+                <div class="score-item">
+                    <span class="category">Previous Government (2016-2020)</span>
+                    <span class="score average">5.9</span>
+                </div>
+                <div class="score-item">
+                    <span class="category">UPA-II (2009-2014)</span>
+                    <span class="score good">6.2</span>
+                </div>
+                <div class="score-item">
+                    <span class="category">UPA-I (2004-2009)</span>
+                    <span class="score excellent">7.8</span>
+                </div>
+                <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                    <strong>Methodology:</strong> Scores based on 50+ indicators including GDP growth, unemployment, infrastructure spend, healthcare outcomes, education metrics, and transparency indices.
+                </div>
+            </div>
+        </div>
+        
+        <div class="news-section">
+            <h2>📰 Today's Governance Impact News</h2>
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterNews('all')">All News</button>
+                <button class="filter-btn" onclick="filterNews('economic')">Economic</button>
+                <button class="filter-btn" onclick="filterNews('social')">Social</button>
+                <button class="filter-btn" onclick="filterNews('infrastructure')">Infrastructure</button>
+                <button class="filter-btn" onclick="filterNews('policy')">Policy</button>
+            </div>
+            
+            <div class="news-item" data-category="economic">
+                <div class="news-title">₹2.7 Lakh Crore Infrastructure Investment Announced for Northeast</div>
+                <div>Government announces major infrastructure push covering highways, railways, and digital connectivity across eight northeastern states.</div>
+                <span class="news-impact positive">+0.3 Infrastructure Score</span>
+            </div>
+            
+            <div class="news-item" data-category="social">
+                <div class="news-title">Unemployment Rate Rises to 7.9% in Latest CMIE Data</div>
+                <div>Monthly unemployment data shows increase from 7.1% last month, with rural areas most affected.</div>
+                <span class="news-impact negative">-0.2 Employment Score</span>
+            </div>
+            
+            <div class="news-item" data-category="policy">
+                <div class="news-title">New Digital Governance Portal Reduces Processing Time by 60%</div>
+                <div>Citizens report faster service delivery through unified portal covering 200+ government services.</div>
+                <span class="news-impact positive">+0.4 Transparency Score</span>
+            </div>
+            
+            <div class="news-item" data-category="economic">
+                <div class="news-title">GDP Growth Forecast Revised Up to 6.8% for Current Fiscal</div>
+                <div>Economic advisory council revises growth projection upward citing strong manufacturing and services performance.</div>
+                <span class="news-impact positive">+0.3 Economic Score</span>
+            </div>
+            
+            <div class="news-item" data-category="social">
+                <div class="news-title">Ayushman Bharat Covers 5 Crore Additional Families</div>
+                <div>Health insurance scheme expansion provides coverage to additional rural and urban poor families.</div>
+                <span class="news-impact positive">+0.1 Healthcare Score</span>
+            </div>
+        </div>
+        
+        <div class="methodology">
+            <h2>🔍 About Informed Citizen</h2>
+            <p><strong>Our Mission:</strong> To provide citizens with objective, fact-based tracking of government performance across all levels - from local to national - enabling informed democratic participation.</p>
+            <br>
+            <p><strong>Data Sources:</strong> Government statistics, RBI reports, NSSO surveys, World Bank data, independent research institutions, court judgments, parliamentary records</p>
+            <br>
+            <p><strong>Scoring Methodology:</strong></p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li><strong>9-10:</strong> Excellent performance, top global quartile</li>
+                <li><strong>7-8.9:</strong> Good performance, above average</li>
+                <li><strong>5-6.9:</strong> Average performance, room for improvement</li>
+                <li><strong>Below 5:</strong> Needs significant attention</li>
+            </ul>
+            <br>
+            <p><strong>Principles:</strong> Facts over opinions • Legal outcomes over allegations • Data over rhetoric • Transparency in methodology • Non-partisan analysis</p>
+            <br>
+            <p><strong>Coming Soon:</strong> State-level tracking • Local government scores • Citizen priority surveys • Historical deep dives • Policy impact predictions</p>
+        </div>
+    </div>
+    
+    <script>
+        function filterNews(category) {
+            const newsItems = document.querySelectorAll('.news-item');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            // Update active button
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter news items
+            newsItems.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        // Simulate real-time updates
+        setInterval(() => {
+            const scores = document.querySelectorAll('.score');
+            scores.forEach(score => {
+                // Add subtle pulse animation to indicate live updates
+                score.style.animation = 'pulse 1s ease-in-out';
+                setTimeout(() => {
+                    score.style.animation = '';
+                }, 1000);
+            });
+        }, 30000);
+        
+        // Add CSS for pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
