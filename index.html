@@ -13,9 +13,9 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
-            color: #333;
+            color: #e1e1e6;
         }
         
         .container {
@@ -33,12 +33,19 @@
         .header h1 {
             font-size: 2.8rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
         .header p {
             font-size: 1.2rem;
             opacity: 0.9;
+        }
+        
+        .header .tagline {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            font-style: italic;
         }
         
         .dashboard {
@@ -49,16 +56,16 @@
         }
         
         .scorecard {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 30, 47, 0.95);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .scorecard h2 {
-            color: #2c3e50;
+            color: #ffffff;
             margin-bottom: 20px;
             font-size: 1.8rem;
         }
@@ -68,7 +75,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
-            border-bottom: 1px solid #ecf0f1;
+            border-bottom: 1px solid #2a2a3e;
         }
         
         .score-item:last-child {
@@ -77,7 +84,7 @@
         
         .category {
             font-weight: 600;
-            color: #34495e;
+            color: #b8b8cc;
         }
         
         .score {
@@ -95,32 +102,39 @@
         .score.average { background: linear-gradient(45deg, #e74c3c, #c0392b); }
         
         .news-section {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 30, 47, 0.95);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 30px;
+        }
+        
+        .news-section h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
         }
         
         .news-item {
             padding: 20px;
             margin: 15px 0;
-            background: #f8f9fa;
+            background: rgba(40, 40, 60, 0.8);
             border-radius: 15px;
-            border-left: 5px solid #3498db;
+            border-left: 5px solid #3b82f6;
             transition: all 0.3s ease;
+            color: #c1c1d1;
         }
         
         .news-item:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            background: rgba(50, 50, 70, 0.9);
         }
         
         .news-title {
             font-weight: bold;
-            color: #2c3e50;
+            color: #ffffff;
             margin-bottom: 8px;
             font-size: 1.1rem;
         }
@@ -134,9 +148,9 @@
             margin-top: 10px;
         }
         
-        .positive { background: #d4edda; color: #155724; }
-        .negative { background: #f8d7da; color: #721c24; }
-        .neutral { background: #d1ecf1; color: #0c5460; }
+        .positive { background: #1e3a3a; color: #4ade80; border: 1px solid #16a34a; }
+        .negative { background: #3a1e1e; color: #f87171; border: 1px solid #dc2626; }
+        .neutral { background: #1e2a3a; color: #60a5fa; border: 1px solid #2563eb; }
         
         .filters {
             display: flex;
@@ -147,27 +161,58 @@
         
         .filter-btn {
             padding: 10px 20px;
-            border: none;
+            border: 1px solid rgba(255,255,255,0.2);
             border-radius: 25px;
-            background: #3498db;
-            color: white;
+            background: rgba(59, 130, 246, 0.2);
+            color: #b8b8cc;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
         }
         
         .filter-btn:hover, .filter-btn.active {
-            background: #2980b9;
+            background: rgba(59, 130, 246, 0.8);
+            color: white;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
         }
         
         .methodology {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 30, 47, 0.95);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .methodology h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        
+        .methodology p {
+            color: #b8b8cc;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .methodology ul {
+            color: #b8b8cc;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .methodology strong {
+            color: #ffffff;
+        }
+        
+        .methodology-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(50, 50, 70, 0.6);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .trend-indicator {
@@ -175,8 +220,8 @@
             margin-left: 10px;
         }
         
-        .trending-up { color: #27ae60; }
-        .trending-down { color: #e74c3c; }
+        .trending-up { color: #4ade80; }
+        .trending-down { color: #f87171; }
         
         @media (max-width: 768px) {
             .dashboard {
@@ -198,7 +243,7 @@
         <div class="header">
             <h1>🗳️ Informed Citizen</h1>
             <p>Empowering democracy through data-driven governance tracking</p>
-            <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
+            <div class="tagline">
                 "Democracy works best when citizens are informed" - Tracking governance performance with facts, not opinions
             </div>
         </div>
@@ -239,7 +284,7 @@
                     <span class="score good">6.8</span>
                 </div>
                 <div class="score-item">
-                    <span class="category">Previous Government (2016-2020)</span>
+                    <span class="category">Previous Term (2014-2019)</span>
                     <span class="score average">5.9</span>
                 </div>
                 <div class="score-item">
@@ -250,8 +295,9 @@
                     <span class="category">UPA-I (2004-2009)</span>
                     <span class="score excellent">7.8</span>
                 </div>
-                <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
-                    <strong>Methodology:</strong> Scores based on 50+ indicators including GDP growth, unemployment, infrastructure spend, healthcare outcomes, education metrics, and transparency indices.
+                <div class="methodology-box">
+                    <strong style="color: #ffffff;">Methodology:</strong> 
+                    <span style="color: #b8b8cc;">Scores based on 50+ indicators including GDP growth, unemployment, infrastructure spend, healthcare outcomes, education metrics, and transparency indices.</span>
                 </div>
             </div>
         </div>
@@ -300,19 +346,19 @@
         <div class="methodology">
             <h2>🔍 About Informed Citizen</h2>
             <p><strong>Our Mission:</strong> To provide citizens with objective, fact-based tracking of government performance across all levels - from local to national - enabling informed democratic participation.</p>
-            <br>
+            
             <p><strong>Data Sources:</strong> Government statistics, RBI reports, NSSO surveys, World Bank data, independent research institutions, court judgments, parliamentary records</p>
-            <br>
+            
             <p><strong>Scoring Methodology:</strong></p>
-            <ul style="margin-left: 20px; margin-top: 10px;">
+            <ul>
                 <li><strong>9-10:</strong> Excellent performance, top global quartile</li>
                 <li><strong>7-8.9:</strong> Good performance, above average</li>
                 <li><strong>5-6.9:</strong> Average performance, room for improvement</li>
                 <li><strong>Below 5:</strong> Needs significant attention</li>
             </ul>
-            <br>
+            
             <p><strong>Principles:</strong> Facts over opinions • Legal outcomes over allegations • Data over rhetoric • Transparency in methodology • Non-partisan analysis</p>
-            <br>
+            
             <p><strong>Coming Soon:</strong> State-level tracking • Local government scores • Citizen priority surveys • Historical deep dives • Policy impact predictions</p>
         </div>
     </div>
